@@ -1,0 +1,31 @@
+<liferay-util:html-bottom outputKey="taglib_ui_social_bookmark_facebook">
+	
+	<div id="fb-root"></div>
+	<script>
+		//Avoid loading the facebook SDK only once.
+		//This makes it impossible to use plugins with different app id's on the same page
+		//Liferay.on('portletReady',
+		//function(data) {
+		//	if(!window.fbIsInit) {
+		//		window.fbAsyncInit = function() {
+		//			FB.init({
+		//				appId      : '<%= appid %>', // App ID from the App Dashboard
+		//				status     : true, // check the login status upon init?
+		//				cookie     : true, // set sessions cookies to allow your server to access the session?
+		//				xfbml      : true  // parse XFBML tags on this page?
+		//			});
+		//			window.fbIsInit = true;
+		//		};
+				// Load the SDK Asynchronously
+				(function(d, s, id) {
+					var js, fjs = d.getElementsByTagName(s)[0];
+					if (d.getElementById(id)) return;
+					js = d.createElement(s); js.id = id;
+					js.src = "//connect.facebook.net/<%= locale.getLanguage() %>_<%= locale.getCountry() %>/all.js#xfbml=1&appId=<%= appid %>";
+					fjs.parentNode.insertBefore(js, fjs);
+				}(document, 'script', 'facebook-jssdk'));
+		//	}
+		//});
+		
+	</script>
+</liferay-util:html-bottom>
