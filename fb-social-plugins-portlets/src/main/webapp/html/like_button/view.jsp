@@ -1,3 +1,5 @@
+<%@page import="java.net.URI"%>
+<%@page import="java.net.URLEncoder"%>
 <%
 /**
  * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
@@ -19,13 +21,21 @@
 <%@include file="/html/like_button/init.jsp" %>
 <%@include file="/html/fb_script.jspf" %>
 <%
-	//Decide which url to use
-	String url = usecurrenturl ? PortalUtil.getCurrentCompleteURL(request) : href;
+
+	String currentCompleteUrl = PortalUtil.getCurrentCompleteURL(request);
+
+	String scheme = HttpUtil.getProtocol(currentCompleteUrl);
+	String host = HttpUtil.getDomain(currentCompleteUrl);
+	String path = HttpUtil.getPath(currentCompleteUrl);
+	String query = HttpUtil.getQueryString(currentCompleteUrl);
+	
+	URI uri = new URI(scheme,host,path,query,null);
+	System.out.println(uri);
 	
 %>
 <div
 	class="fb-like"
-	data-href="<%= url %>"
+	data-href="<%= uri.toString() %>"
 	data-send="<%= sendbutton %>"
 	data-layout="<%= layoutstyle %>"
 	data-width="<%= width %>"
